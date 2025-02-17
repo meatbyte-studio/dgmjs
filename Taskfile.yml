@@ -1,0 +1,13 @@
+version: "3"
+
+tasks:
+  build:
+    cmds:
+      - docker build -t draw-server:latest .
+    silent: true
+
+  push:
+    cmds:
+      - docker tag draw-server:latest ghcr.io/meatbyte-studio/draw-server:latest
+      - docker push ghcr.io/meatbyte-studio/draw-server:latest
+    silent: true
