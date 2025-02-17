@@ -12,11 +12,13 @@ import {
   XIcon,
 } from "lucide-react";
 import { useDrawStore } from "@/draw-store";
+import { useState } from "react";
 
 interface PageViewProps extends React.HTMLAttributes<HTMLDivElement> {
   doc: Doc;
   page: Page;
   idx: number;
+  onRefresh: () => void;
 }
 
 const PageView: React.FC<PageViewProps> = ({
@@ -24,6 +26,7 @@ const PageView: React.FC<PageViewProps> = ({
   page,
   idx,
   className,
+  onRefresh,
   ...others
 }) => {
   const { darkMode } = useDrawStore();
@@ -63,6 +66,7 @@ const PageView: React.FC<PageViewProps> = ({
                   page.name = `Copy of ${page.name}`;
                 }
               );
+              onRefresh();
             }}
           >
             <CopyIcon size={16} />
@@ -72,8 +76,10 @@ const PageView: React.FC<PageViewProps> = ({
             size="icon"
             className="w-7 h-7"
             onClick={() => {
-              if (idx > 0)
+              if (idx > 0) {
                 window.editor.actions.reorderPage(page as Page, idx - 1);
+                onRefresh();
+              }
             }}
           >
             <ArrowUpIcon size={16} />
@@ -84,6 +90,7 @@ const PageView: React.FC<PageViewProps> = ({
             className="w-7 h-7"
             onClick={() => {
               window.editor.actions.reorderPage(page as Page, idx + 1);
+              onRefresh();
             }}
           >
             <ArrowDownIcon size={16} />
@@ -95,6 +102,7 @@ const PageView: React.FC<PageViewProps> = ({
             onClick={() => {
               if (idx > 0) {
                 window.editor.actions.removePage(page as Page);
+                onRefresh();
               }
             }}
           >
@@ -119,7 +127,7 @@ const PageView: React.FC<PageViewProps> = ({
 export interface PagesProps {
   doc: Doc;
   currentPage: Page | null;
-  onPageSelect?: (page: Page) => void;
+  onPageSelect?: (page: Page | null) => void;
 }
 
 export const Pages: React.FC<PagesProps> = ({
@@ -127,8 +135,14 @@ export const Pages: React.FC<PagesProps> = ({
   currentPage,
   onPageSelect,
 }) => {
+  const [refreshKey, setRefreshKey] = useState<number>(Date.now());
+
+  const handleRefresh = () => {
+    setRefreshKey(Date.now());
+  };
+
   return (
-    <ScrollArea className="h-full w-full">
+    <ScrollArea className="h-full w-full" key={refreshKey}>
       {doc?.children.map((page, idx) => (
         <PageView
           doc={doc}
@@ -139,6 +153,7 @@ export const Pages: React.FC<PagesProps> = ({
           onClick={() => {
             if (onPageSelect) onPageSelect(page as Page);
           }}
+          onRefresh={handleRefresh}
         />
       ))}
     </ScrollArea>

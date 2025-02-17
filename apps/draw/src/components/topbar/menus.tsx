@@ -13,7 +13,7 @@ import { useDrawStore } from "@/draw-store";
 import { ExportImageFormat, exportImageAsFile } from "@dgmjs/export";
 import { exportPDFAsFile, ExportPDFOptions } from "@dgmjs/pdf";
 import fontJson from "@/fonts.json";
-import { SidebarTrigger } from "./ui/sidebar";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 
 function arrayBufferToBinaryString(buffer: ArrayBuffer) {
   return new Uint8Array(buffer).reduce(
@@ -249,7 +249,7 @@ export function Menus() {
 
   return (
     <div className="flex justify-center items-center h-8 px-1">
-      <SidebarTrigger />
+      <SidebarTrigger title="Toggle Pages Sidebar" />
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="h-8 w-8 p-0">
@@ -311,7 +311,12 @@ export function Menus() {
           </DropdownMenuCheckboxItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <Button variant="ghost" className="h-8 w-8 p-0" onClick={handleAddPage}>
+      <Button
+        variant="ghost"
+        className="h-8 w-8 p-0"
+        onClick={handleAddPage}
+        title="Add Page"
+      >
         <PlusIcon size={16} />
       </Button>
     </div>

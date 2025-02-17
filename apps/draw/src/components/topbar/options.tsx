@@ -1,13 +1,13 @@
 import { MoonIcon, SunIcon } from "lucide-react";
 import { useDrawStore } from "@/draw-store";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 
 export function Options() {
   const { darkMode, setDarkMode } = useDrawStore();
   return (
     <div className="flex justify-center items-center h-8 px-1">
       <Button
-        title="Dark mode"
+        title={darkMode ? "Light mode" : "Dark mode"}
         variant="ghost"
         className="h-8 w-8 p-0"
         onClick={() => {

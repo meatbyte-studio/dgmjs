@@ -6,8 +6,6 @@ import {
 import { nanoid } from "nanoid";
 import { PaletteToolbar } from "./components/palette-toolbar";
 import { useDrawStore } from "./draw-store";
-import { Options } from "./components/options";
-import { Menus } from "./components/menus";
 import { PropertySidebar } from "./components/property-sidebar";
 import fontJson from "./fonts.json";
 import { Font, fetchFonts, insertFontsToDocument } from "./font-manager";
@@ -22,8 +20,8 @@ import {
   ContextMenuTrigger,
 } from "./components/ui/context-menu";
 import { useEffect, useState } from "react";
-import { Share } from "./components/share";
 import { Sidebar, SidebarProvider } from "@/components/ui/sidebar";
+import { TopBar } from "./components/topbar";
 
 declare global {
   interface Window {
@@ -58,21 +56,26 @@ function App() {
     };
   }, []);
 
+  const getUserIdentity = () => {
+    const identity = generateUserIdentity();
+    const storedName = localStorage.getItem("share-identity-name");
+    const storedColor = localStorage.getItem("share-identity-color");
+    if (storedName) {
+      identity.name = storedName;
+    }
+    if (storedColor) {
+      identity.color = storedColor;
+    }
+    return identity;
+  };
+
   const handleMount = async (editor: Editor) => {
     window.editor = editor;
     insertFontsToDocument(fontJson as Font[]);
     await fetchFonts(fontJson as Font[]);
 
     if (roomId) {
-      const identity = generateUserIdentity();
-      const storedName = localStorage.getItem("share-identity-name");
-      const storedColor = localStorage.getItem("share-identity-color");
-      if (storedName) {
-        identity.name = storedName;
-      }
-      if (storedColor) {
-        identity.color = storedColor;
-      }
+      const identity = getUserIdentity();
       collab.start(window.editor, roomId, identity);
       console.log("collab started with roomId", roomId);
       drawStore.setShareRoomId(roomId);
@@ -173,7 +176,7 @@ function App() {
 
   const handleShare = () => {
     const roomId = nanoid();
-    const identity = generateUserIdentity();
+    const identity = getUserIdentity();
     collab.start(window.editor, roomId!, identity);
     collab.flush();
     window.history.pushState({}, "", `?roomId=${roomId}`);
@@ -248,15 +251,11 @@ function App() {
             <ContextMenuItem>Delete (Broken)</ContextMenuItem>
           </ContextMenuContent>
         </ContextMenu>
-        <div className="absolute top-2 left-1/2 transform -translate-x-1/2 h-10 w-[800px] border rounded-lg flex items-center justify-between bg-background">
-          <Menus />
-          <Options />
-          <Share
-            handleShare={handleShare}
-            handleShareStop={handleShareStop}
-            handleShareIdentityUpdate={handleShareIdentityUpdate}
-          />
-        </div>
+        <TopBar
+          handleShare={handleShare}
+          handleShareStop={handleShareStop}
+          handleShareIdentityUpdate={handleShareIdentityUpdate}
+        />
         <PaletteToolbar />
         <SelectShapeDialog />
         <PropertySidebar
