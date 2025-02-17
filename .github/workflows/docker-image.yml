@@ -2,33 +2,32 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
-    - name: Build Docker Image
-      run: docker buildx build --file Dockerfile --tag draw-server:${{ github.sha }} .
+      - name: Build Docker Image
+        run: docker buildx build --load --file Dockerfile --tag draw-server:${{ github.sha }} .
 
-    - name: Log in to GitHub Container Registry
-      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-      
-    - name: Tag image:sha
-      run: docker tag draw-server:${{ github.sha }} ghcr.io/${{ github.repository_owner }}/draw-server:${{ github.sha }}
-          
-    - name: Push image:sha
-      run: docker push ghcr.io/${{ github.repository_owner }}/draw-server:${{ github.sha }}
-      
-    - name: Tag Docker image:latest
-      run: docker tag draw-server:${{ github.sha }} ghcr.io/${{ github.repository_owner }}/draw-server:latest
+      - name: Log in to GitHub Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
-    - name: Push image:latest
-      run: docker push ghcr.io/${{ github.repository_owner }}/draw-server:latest
+      - name: Tag image:sha
+        run: docker tag draw-server:${{ github.sha }} ghcr.io/${{ github.repository_owner }}/draw-server:${{ github.sha }}
+
+      - name: Push image:sha
+        run: docker push ghcr.io/${{ github.repository_owner }}/draw-server:${{ github.sha }}
+
+      - name: Tag Docker image:latest
+        run: docker tag draw-server:${{ github.sha }} ghcr.io/${{ github.repository_owner }}/draw-server:latest
+
+      - name: Push image:latest
+        run: docker push ghcr.io/${{ github.repository_owner }}/draw-server:latest
