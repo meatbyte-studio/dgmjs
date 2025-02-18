@@ -11,3 +11,9 @@ tasks:
       - docker tag draw-server:latest ghcr.io/meatbyte-studio/draw-server:latest
       - docker push ghcr.io/meatbyte-studio/draw-server:latest
     silent: true
+
+  docs:
+    cmds:
+      - npm run build -w draw
+      - cp -r apps/draw/dist/* docs/
+    silent: true

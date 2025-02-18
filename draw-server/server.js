@@ -8,6 +8,10 @@ import fs from "fs";
 import dotenv from "dotenv";
 import { nanoid } from "nanoid";
 
+const generateUniquePassword = () => {
+  return nanoid();
+};
+
 dotenv.config({ path: "./.env" });
 
 const wsReadyStateConnecting = 0;
@@ -17,16 +21,11 @@ const wsReadyStateClosed = 3; // eslint-disable-line
 
 const pingTimeout = 30000;
 
-const port = process.env.PORT || 4444;
 const wss = new WebSocketServer({ noServer: true });
 
-const staticFilesPath = process.env.DIST_DIR || "./public";
-const signalingUrls = process.env.SIGNALING_URLS || "";
-
-const generateUniquePassword = () => {
-  return nanoid();
-};
-
+const port = process.env.PORT || 4444;
+const staticFilesPath = process.env.DIST_DIR || "./dist";
+const signalingUrls = process.env.SIGNALING_URLS || ["*"];
 const signalingPassword =
   process.env.SIGNALING_PASSWORD || generateUniquePassword();
 

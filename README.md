@@ -1,19 +1,19 @@
-# Draw Server
-
-Draw Server using [DGM.js](https://github.com/dgmjs/dgmjs).
-
 ![Draw App](image.png)
+
+# Draw Web App
+
+[Draw Web App](https://meatbyte-studio.github.io/draw-server/) using [DGM.js](https://github.com/dgmjs/dgmjs).
 
 ## Features
 
-- Created a dedicated Draw App based on [demo app](https://github.com/dgmjs/dgmjs/blob/main/apps/demo/README.md)
+- Created a dedicated Draw Web App based on [demo app](https://github.com/dgmjs/dgmjs/blob/main/apps/demo/README.md)
 - Improved collaboration mode
 - Improved styling for light mode and dark mode
 - Added self-contained server to serve the html files and y-webrtc server.
 
 ## Container Images
 
-Draw Server is a self-contained image that serves the draw web app and the y-webrtc server within a very simple node server.js script.
+[Draw Web App](https://meatbyte-studio.github.io/draw-server/) is a self-contained image that serves the draw web app and the y-webrtc server within a very simple node server.js script.
 
 https://ghcr.io/meatbyte-studio/draw-server:latest
 

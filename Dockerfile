@@ -33,8 +33,6 @@ WORKDIR /app
 COPY --from=build /app/draw-server/ ./
 COPY --from=build /app/apps/draw/dist ./dist
 
-RUN echo "DIST_DIR=./dist" > .env
-
 LABEL org.opencontainers.image.source=https://github.com/meatbyte-studio/draw-server
 
 CMD ["npm", "run", "start"]
