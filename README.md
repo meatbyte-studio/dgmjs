@@ -15,9 +15,9 @@ To see what it looks like once deployed: [Draw Web App](https://meatbyte-studio.
 
 ## Todo
 
-[ ] - Convert to Next.js
-[ ] - Add context menu options
-[ ] - Add library options
+- [ ] Convert to Next.js
+- [ ] Add context menu options
+- [ ] Add library options
 
 ## Container Images
 
