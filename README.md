@@ -2,7 +2,9 @@
 
 # Draw Web App
 
-[Draw Web App](https://meatbyte-studio.github.io/draw-server/) using [DGM.js](https://github.com/dgmjs/dgmjs).
+A web application that allows you to draw diagrams and whiteboard in a collaborated mode. This is built using [DGM.js](https://github.com/dgmjs/dgmjs). In fact, the base of the web application is current the [demo app](https://github.com/dgmjs/dgmjs/blob/main/apps/demo/README.md).
+
+To see what it looks like once deployed: [Draw Web App](https://meatbyte-studio.github.io/draw-server/)
 
 ## Features
 
@@ -11,9 +13,15 @@
 - Improved styling for light mode and dark mode
 - Added self-contained server to serve the html files and y-webrtc server.
 
+## Todo
+
+[ ] - Convert to Next.js
+[ ] - Add context menu options
+[ ] - Add library options
+
 ## Container Images
 
-[Draw Web App](https://meatbyte-studio.github.io/draw-server/) is a self-contained image that serves the draw web app and the y-webrtc server within a very simple node server.js script.
+Draw Web App is a self-contained image that serves the draw web app and the y-webrtc server within a very simple node server.js script.
 
 https://ghcr.io/meatbyte-studio/draw-server:latest
 
@@ -31,7 +39,7 @@ https://ghcr.io/meatbyte-studio/draw-server:latest
 
 You can pass in params to the url to specify a signaling server and the signaling password.
 
-https://meatbyte-studio.github.io/draw-server/?signalingUrl=wss://webrtc.example.com&signalingPassword=amarikapye
+http://localhost:4444/?signalingUrl=wss://webrtc.example.com&signalingPassword=amarikapye
 
 Note: webrtc.example.com is not an actual y-webrtc server.
 
