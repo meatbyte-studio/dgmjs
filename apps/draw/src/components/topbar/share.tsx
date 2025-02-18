@@ -33,11 +33,9 @@ export function Share({
   if (hasCollab === false) {
     return (
       <div className="flex justify-center items-center h-8 px-1">
-        <Input
-          className="h-8 rounded-md px-3 text-xs text-red-500 w-[272px]"
-          value="Collaboration is not available on Github Pages."
-          readOnly
-        />
+        <div className="rounded-md text-xs mr-2 text-red-500">
+          Collaboration is not available on Github Pages.
+        </div>
       </div>
     );
   }
