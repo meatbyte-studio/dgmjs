@@ -235,11 +235,12 @@ function App() {
       collab.updateUserIdentity(identity);
     }
   };
-  const defaultOpen =
-    document.cookie
-      .split("; ")
-      .find((row) => row.startsWith("sidebar_state="))
-      ?.split("=")[1] === "true";
+
+  const sidebarState = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("sidebar_state="))
+    ?.split("=")[1];
+  const defaultOpen = sidebarState === null ? true : sidebarState === "true";
 
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
