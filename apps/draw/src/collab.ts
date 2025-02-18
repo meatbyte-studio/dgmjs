@@ -65,11 +65,11 @@ export class Collab {
     this.signalingUrls = [`${protocol}://${window.location.hostname}${port}`];
   }
 
-  setSignalingUrl(signalingUrl: string) {
-    if (signalingUrl === "*") {
+  setSignalingUrls(signalingUrls: string[]) {
+    if (signalingUrls.length === 1 && signalingUrls[0] === "*") {
       this.autoDetermineSignalingUrl();
     } else {
-      this.signalingUrls = [signalingUrl];
+      this.signalingUrls = signalingUrls;
     }
   }
 

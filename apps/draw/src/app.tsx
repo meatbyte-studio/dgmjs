@@ -73,12 +73,26 @@ function App() {
   const handleMount = async (editor: Editor) => {
     window.editor = editor;
     insertFontsToDocument(fontJson as Font[]);
-    await fetchFonts(fontJson as Font[]);
+    try {
+      await fetchFonts(fontJson as Font[]);
+    } catch (e) {
+      console.error(e);
+    }
 
-    const response = await fetch("config.json");
-    const config = await response.json();
-    let signalingUrls = config.signalingUrls;
-    let signalingPassword = params.signalingUrl;
+    let config = {
+      signalingUrls: [],
+      signalingPassword: "",
+    };
+
+    try {
+      const response = await fetch("config.json");
+      config = await response.json();
+    } catch (e) {
+      console.error(e);
+    }
+
+    let signalingUrls: string[] = config.signalingUrls;
+    let signalingPassword = config.signalingPassword;
     if (params.signalingUrl) {
       signalingUrls = [params.signalingUrl];
     }
@@ -86,9 +100,9 @@ function App() {
       signalingPassword = params.signalingPassword;
     }
 
-    collab.setSignalingUrl(signalingUrls);
-    drawStore.setHasCollab(signalingUrls.length > 0);
+    collab.setSignalingUrls(signalingUrls);
     collab.setSignalingPassword(signalingPassword);
+    drawStore.setHasCollab(signalingUrls.length > 0);
 
     if (roomId) {
       const identity = getUserIdentity();
