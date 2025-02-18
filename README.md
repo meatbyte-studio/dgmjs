@@ -31,7 +31,9 @@ https://ghcr.io/meatbyte-studio/draw-server:latest
 
 You can pass in params to the url to specify a signaling server and the signaling password.
 
-https://meatbyte-studio.github.io/draw-server/?signalingUrl=wss://webrtc.example.comh&signalingPassword=amarikapye
+https://meatbyte-studio.github.io/draw-server/?signalingUrl=wss://webrtc.example.com&signalingPassword=amarikapye
+
+Note: webrtc.example.com is not an actual y-webrtc server.
 
 ## Running dev mode
 
