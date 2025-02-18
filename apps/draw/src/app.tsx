@@ -240,7 +240,8 @@ function App() {
     .split("; ")
     .find((row) => row.startsWith("sidebar_state="))
     ?.split("=")[1];
-  const defaultOpen = sidebarState === null ? true : sidebarState === "true";
+  const defaultOpen =
+    sidebarState === undefined ? true : sidebarState === "true";
 
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
