@@ -14,7 +14,8 @@ export function Share({
   handleShareStop,
   handleShareIdentityUpdate,
 }: ShareProps) {
-  const { shareRoomId, shareIdentity, setShareIdentity } = useDrawStore();
+  const { hasCollab, shareRoomId, shareIdentity, setShareIdentity } =
+    useDrawStore();
   const updateIdentity = () => {
     const color = UserColors[Math.round(Math.random() * UserColors.length - 1)];
     setShareIdentity({
@@ -24,6 +25,23 @@ export function Share({
     });
     handleShareIdentityUpdate();
   };
+
+  if (hasCollab === null) {
+    return <div></div>;
+  }
+
+  if (hasCollab === false) {
+    return (
+      <div className="flex justify-center items-center h-8 px-1">
+        <Input
+          className="h-8 rounded-md px-3 text-xs text-red-500 w-[272px]"
+          value="Collaboration is not available on Github Pages."
+          readOnly
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="flex justify-center items-center h-8 px-1">
       {shareRoomId && shareIdentity && (

@@ -33,10 +33,7 @@ WORKDIR /app
 COPY --from=build /app/draw-server/ ./
 COPY --from=build /app/apps/draw/dist ./dist
 
-RUN echo "PORT=4444" > .env
-RUN echo "DIST_DIR=./dist" >> .env
-
-EXPOSE 4444
+RUN echo "DIST_DIR=./dist" > .env
 
 LABEL org.opencontainers.image.source=https://github.com/meatbyte-studio/draw-server
 

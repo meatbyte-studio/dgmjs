@@ -50,6 +50,7 @@ function App() {
         setIsTextFocused(false);
       }
     };
+
     document.addEventListener("focusin", focusinHandler);
     return () => {
       document.removeEventListener("focusin", focusinHandler);
@@ -73,6 +74,21 @@ function App() {
     window.editor = editor;
     insertFontsToDocument(fontJson as Font[]);
     await fetchFonts(fontJson as Font[]);
+
+    const response = await fetch("config.json");
+    const config = await response.json();
+    let signalingUrls = config.signalingUrls;
+    let signalingPassword = params.signalingUrl;
+    if (params.signalingUrl) {
+      signalingUrls = [params.signalingUrl];
+    }
+    if (params.signalingPassword) {
+      signalingPassword = params.signalingPassword;
+    }
+
+    collab.setSignalingUrl(signalingUrls);
+    drawStore.setHasCollab(signalingUrls.length > 0);
+    collab.setSignalingPassword(signalingPassword);
 
     if (roomId) {
       const identity = getUserIdentity();
@@ -170,7 +186,7 @@ function App() {
     drawStore.setCurrentPage(currentPage);
   };
 
-  const handleCurrentPageChange = (page: Page) => {
+  const handleCurrentPageChange = (page: Page | null) => {
     drawStore.setCurrentPage(page);
   };
 
@@ -179,14 +195,35 @@ function App() {
     const identity = getUserIdentity();
     collab.start(window.editor, roomId!, identity);
     collab.flush();
-    window.history.pushState({}, "", `?roomId=${roomId}`);
+    const signalingPassword = params.signalingPassword;
+    const signalingUrl = params.signalingUrl;
+
+    let newUrl = `${window.location.pathname}?roomId=${roomId}`;
+    if (signalingUrl) {
+      newUrl += `&signalingUrl=${signalingUrl}`;
+    }
+    if (signalingPassword) {
+      newUrl += `&signalingPassword=${signalingPassword}`;
+    }
+
+    window.history.pushState({}, "", newUrl);
     drawStore.setShareRoomId(roomId);
     drawStore.setShareIdentity(identity);
   };
 
   const handleShareStop = () => {
     collab.stop();
-    window.history.pushState({}, "", "/");
+    const signalingPassword = params.signalingPassword;
+    const signalingUrl = params.signalingUrl;
+    let newUrl = `${window.location.pathname}?`;
+    if (signalingUrl) {
+      newUrl += `signalingUrl=${signalingUrl}`;
+    }
+    if (signalingPassword) {
+      newUrl += `&signalingPassword=${signalingPassword}`;
+    }
+
+    window.history.pushState({}, "", newUrl);
     drawStore.setShareRoomId(null);
   };
 
@@ -211,8 +248,10 @@ function App() {
           doc={drawStore.doc!}
           currentPage={drawStore.currentPage}
           onSelect={handleSidebarSelect}
-          onPageSelect={(page) => {
-            window.editor.setCurrentPage(page);
+          onPageSelect={(page: Page | null) => {
+            if (page !== null) {
+              window.editor.setCurrentPage(page);
+            }
           }}
         />
       </Sidebar>

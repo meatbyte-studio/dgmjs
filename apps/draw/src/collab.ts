@@ -48,12 +48,33 @@ export class Collab {
   yProvider: WebrtcProvider | null;
   syncStarted: boolean;
   oDocReady: TypedEvent<void>;
+  signalingUrls: string[] = [];
+  signalingPassword: string = "";
 
   constructor() {
     this.yDoc = null;
     this.yProvider = null;
     this.syncStarted = false;
     this.oDocReady = new TypedEvent();
+  }
+
+  autoDetermineSignalingUrl() {
+    const protocol = window.location.protocol === "https:" ? "wss" : "ws";
+    const port =
+      window.location.protocol === "https:" ? "" : `:${window.location.port}`;
+    this.signalingUrls = [`${protocol}://${window.location.hostname}${port}`];
+  }
+
+  setSignalingUrl(signalingUrl: string) {
+    if (signalingUrl === "*") {
+      this.autoDetermineSignalingUrl();
+    } else {
+      this.signalingUrls = [signalingUrl];
+    }
+  }
+
+  setSignalingPassword(signalingPassword: string) {
+    this.signalingPassword = signalingPassword;
   }
 
   start(editor: Editor, roomId: string, userIdentity: UserIdentity) {
@@ -75,13 +96,11 @@ export class Collab {
       }
     });
 
-    const protocol = window.location.protocol === "https:" ? "wss" : "ws";
-    const port =
-      window.location.protocol === "https:" ? "" : `:${window.location.port}`;
     this.yProvider = new WebrtcProvider(roomId, this.yDoc, {
-      signaling: [`${protocol}://${window.location.hostname}${port}`],
-      password: "Z659mCa9CxGEPEeomjp6Zro3nqi",
+      signaling: this.signalingUrls,
+      password: this.signalingPassword,
     });
+
     this.docSyncPlugin.start(this.yDoc);
     this.userPresencePlugin.start(this.yProvider.awareness, userIdentity);
     this.userPresencePlugin.onUserEnter.addListener((users) => {

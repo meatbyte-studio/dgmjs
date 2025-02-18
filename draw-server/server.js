@@ -6,6 +6,7 @@ import * as map from "lib0/map";
 import path from "path";
 import fs from "fs";
 import dotenv from "dotenv";
+import { nanoid } from "nanoid";
 
 dotenv.config({ path: "./.env" });
 
@@ -20,9 +21,28 @@ const port = process.env.PORT || 4444;
 const wss = new WebSocketServer({ noServer: true });
 
 const staticFilesPath = process.env.DIST_DIR || "./public";
+const signalingUrls = process.env.SIGNALING_URLS || "";
+
+const generateUniquePassword = () => {
+  return nanoid();
+};
+
+const signalingPassword =
+  process.env.SIGNALING_PASSWORD || generateUniquePassword();
 
 const server = http.createServer((request, response) => {
   let url = request.url.split("?")[0].split("#")[0];
+
+  if (url === "/config.json") {
+    const config = {
+      signalingUrls: signalingUrls.split(",").map((url) => url.trim()),
+      signalingPassword: signalingPassword,
+    };
+    response.writeHead(200, { "Content-Type": "application/json" });
+    response.end(JSON.stringify(config));
+    return;
+  }
+
   const filePath = path.join(staticFilesPath, url === "/" ? "index.html" : url);
   fs.readFile(filePath, (err, data) => {
     if (err) {

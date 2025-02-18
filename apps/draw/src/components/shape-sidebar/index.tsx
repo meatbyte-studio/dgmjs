@@ -9,7 +9,7 @@ export interface ShapeSidebarProps {
   doc: Doc;
   currentPage: Page | null;
   onSelect?: (selection: Shape[]) => void;
-  onPageSelect?: (page: Page) => void;
+  onPageSelect: (page: Page | null) => void;
 }
 
 export const ShapeSidebar: React.FC<ShapeSidebarProps> = ({

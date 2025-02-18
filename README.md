@@ -1,13 +1,37 @@
 # Draw Server
 
-Codebase is forked from [DGM.js](https://github.com/dgmjs/dgmjs)
+Draw Server using [DGM.js](https://github.com/dgmjs/dgmjs).
 
-## Modifications
+![Draw App](image.png)
+
+## Features
 
 - Created a dedicated Draw App based on [demo app](https://github.com/dgmjs/dgmjs/blob/main/apps/demo/README.md)
 - Improved collaboration mode
 - Improved styling for light mode and dark mode
-- Self-contained server to serve the files and y-webrtc server.
+- Added self-contained server to serve the html files and y-webrtc server.
+
+## Container Images
+
+Draw Server is a self-contained image that serves the draw web app and the y-webrtc server within a very simple node server.js script.
+
+https://ghcr.io/meatbyte-studio/draw-server:latest
+
+[K8s-manifest-example.yaml](draw-server/k8s-manifest-example.yaml)
+
+## Environment Variables
+
+| Variable             | Description               | Default Value | Note                                                                                                                                                                |
+| -------------------- | ------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `PORT`               | Port to run server        | `"4444"`      |                                                                                                                                                                     |
+| `SIGNALING_URLS`     | URLs for signaling server | `"*"`         | If it is `"*"`, then the frontend will just replace https/http with wss/ws. Otherwise, you can pass in comma separated values: `"draw.example.com,draw.google.com"` |
+| `SIGNALING_PASSWORD` | Password for signaling    | `""`          | Auto-generated on server start if empty                                                                                                                             |
+
+## Y-webrtc via Params
+
+You can pass in params to the url to specify a signaling server and the signaling password.
+
+https://meatbyte-studio.github.io/draw-server/?signalingUrl=wss://webrtc.example.comh&signalingPassword=amarikapye
 
 ## Running dev mode
 
@@ -22,6 +46,8 @@ $ npm run dev -w draw
 ```
 
 # Original README.md
+
+Codebase is forked from [DGM.js](https://github.com/dgmjs/dgmjs)
 
 ![DGM.js](https://fs.dgm.sh/i/7GS5SV8W3uojHd3cbfVzJ/lwpx3u3x@2x.png)
 

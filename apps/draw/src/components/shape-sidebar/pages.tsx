@@ -18,6 +18,8 @@ interface PageViewProps extends React.HTMLAttributes<HTMLDivElement> {
   doc: Doc;
   page: Page;
   idx: number;
+  pagesCount: number;
+  onPageSelect: (page: Page) => void;
   onRefresh: () => void;
 }
 
@@ -25,11 +27,13 @@ const PageView: React.FC<PageViewProps> = ({
   doc,
   page,
   idx,
+  pagesCount,
+  onPageSelect,
   className,
   onRefresh,
   ...others
 }) => {
-  const { darkMode } = useDrawStore();
+  const { darkMode, setDoc } = useDrawStore();
   const shapeViewRef = useRef<DGMShapeViewHandle>(null);
 
   return (
@@ -100,9 +104,14 @@ const PageView: React.FC<PageViewProps> = ({
             size="icon"
             className="w-7 h-7"
             onClick={() => {
-              if (idx > 0) {
-                window.editor.actions.removePage(page as Page);
-                onRefresh();
+              window.editor.actions.removePage(page as Page);
+              onRefresh();
+              if (pagesCount <= 1) {
+                window.editor.newDoc();
+                setDoc(window.editor.getDoc());
+                onPageSelect(window.editor.getCurrentPage() as Page);
+                const data = window.editor.store.toJSON();
+                localStorage.setItem("local-data", JSON.stringify(data));
               }
             }}
           >
@@ -127,7 +136,7 @@ const PageView: React.FC<PageViewProps> = ({
 export interface PagesProps {
   doc: Doc;
   currentPage: Page | null;
-  onPageSelect?: (page: Page | null) => void;
+  onPageSelect: (page: Page | null) => void;
 }
 
 export const Pages: React.FC<PagesProps> = ({
@@ -149,7 +158,9 @@ export const Pages: React.FC<PagesProps> = ({
           key={page.id}
           page={page as Page}
           idx={idx}
+          pagesCount={doc.children.length}
           className={cn(page.id === currentPage?.id && "bg-muted")}
+          onPageSelect={onPageSelect}
           onClick={() => {
             if (onPageSelect) onPageSelect(page as Page);
           }}

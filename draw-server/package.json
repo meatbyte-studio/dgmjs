@@ -10,8 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "ws": "^8.0.0",
+    "dotenv": "^10.0.0",
     "lib0": "^0.2.0",
-    "dotenv": "^10.0.0"
+    "nanoid": "^5.1.0",
+    "ws": "^8.0.0"
   }
 }
