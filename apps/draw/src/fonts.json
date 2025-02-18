@@ -4,140 +4,140 @@
     "family": "Inter",
     "style": "normal",
     "weight": 400,
-    "src": "/fonts/Inter-Regular.ttf"
+    "src": "./fonts/Inter-Regular.ttf"
   },
   {
     "category": "sans",
     "family": "Inter",
     "style": "italic",
     "weight": 400,
-    "src": "/fonts/Inter-Italic.ttf"
+    "src": "./fonts/Inter-Italic.ttf"
   },
   {
     "category": "sans",
     "family": "Inter",
     "style": "normal",
     "weight": 500,
-    "src": "/fonts/Inter-Medium.ttf"
+    "src": "./fonts/Inter-Medium.ttf"
   },
   {
     "category": "sans",
     "family": "Inter",
     "style": "italic",
     "weight": 500,
-    "src": "/fonts/Inter-MediumItalic.ttf"
+    "src": "./fonts/Inter-MediumItalic.ttf"
   },
   {
     "category": "sans",
     "family": "Inter",
     "style": "normal",
     "weight": 600,
-    "src": "/fonts/Inter-SemiBold.ttf"
+    "src": "./fonts/Inter-SemiBold.ttf"
   },
   {
     "category": "sans",
     "family": "Inter",
     "style": "italic",
     "weight": 600,
-    "src": "/fonts/Inter-SemiBoldItalic.ttf"
+    "src": "./fonts/Inter-SemiBoldItalic.ttf"
   },
   {
     "category": "sans",
     "family": "Inter",
     "style": "normal",
     "weight": 700,
-    "src": "/fonts/Inter-Bold.ttf"
+    "src": "./fonts/Inter-Bold.ttf"
   },
   {
     "category": "sans",
     "family": "Inter",
     "style": "italic",
     "weight": 700,
-    "src": "/fonts/Inter-BoldItalic.ttf"
+    "src": "./fonts/Inter-BoldItalic.ttf"
   },
   {
     "category": "sans",
     "family": "Inter",
     "style": "normal",
     "weight": 800,
-    "src": "/fonts/Inter-ExtraBold.ttf"
+    "src": "./fonts/Inter-ExtraBold.ttf"
   },
   {
     "category": "sans",
     "family": "Inter",
     "style": "italic",
     "weight": 800,
-    "src": "/fonts/Inter-ExtraBoldItalic.ttf"
+    "src": "./fonts/Inter-ExtraBoldItalic.ttf"
   },
   {
     "category": "serif",
     "family": "Source Serif Pro",
     "style": "normal",
     "weight": 400,
-    "src": "/fonts/SourceSerifPro-Regular.ttf"
+    "src": "./fonts/SourceSerifPro-Regular.ttf"
   },
   {
     "category": "serif",
     "family": "Source Serif Pro",
     "style": "italic",
     "weight": 400,
-    "src": "/fonts/SourceSerifPro-Italic.ttf"
+    "src": "./fonts/SourceSerifPro-Italic.ttf"
   },
   {
     "category": "serif",
     "family": "Source Serif Pro",
     "style": "normal",
     "weight": 700,
-    "src": "/fonts/SourceSerifPro-Bold.ttf"
+    "src": "./fonts/SourceSerifPro-Bold.ttf"
   },
   {
     "category": "serif",
     "family": "Source Serif Pro",
     "style": "italic",
     "weight": 700,
-    "src": "/fonts/SourceSerifPro-BoldItalic.ttf"
+    "src": "./fonts/SourceSerifPro-BoldItalic.ttf"
   },
   {
     "category": "mono",
     "family": "IBM Plex Mono",
     "style": "normal",
     "weight": 400,
-    "src": "/fonts/IBMPlexMono-Regular.ttf"
+    "src": "./fonts/IBMPlexMono-Regular.ttf"
   },
   {
     "category": "mono",
     "family": "IBM Plex Mono",
     "style": "italic",
     "weight": 400,
-    "src": "/fonts/IBMPlexMono-Italic.ttf"
+    "src": "./fonts/IBMPlexMono-Italic.ttf"
   },
   {
     "category": "mono",
     "family": "IBM Plex Mono",
     "style": "normal",
     "weight": 700,
-    "src": "/fonts/IBMPlexMono-Bold.ttf"
+    "src": "./fonts/IBMPlexMono-Bold.ttf"
   },
   {
     "category": "mono",
     "family": "IBM Plex Mono",
     "style": "italic",
     "weight": 700,
-    "src": "/fonts/IBMPlexMono-BoldItalic.ttf"
+    "src": "./fonts/IBMPlexMono-BoldItalic.ttf"
   },
   {
     "category": "hand",
     "family": "Gloria Hallelujah",
     "style": "normal",
     "weight": 400,
-    "src": "/fonts/GloriaHallelujah-Regular.ttf"
+    "src": "./fonts/GloriaHallelujah-Regular.ttf"
   },
   {
     "category": "hand",
     "family": "Gloria Hallelujah",
     "style": "normal",
     "weight": 400,
-    "src": "/fonts/NanumHimnaeraneunmalbodan-Regular.ttf",
+    "src": "./fonts/NanumHimnaeraneunmalbodan-Regular.ttf",
     "sizeAdjust": "130%",
     "unicodeRange": "U+AC00-D7A3"
   },
@@ -146,27 +146,27 @@
     "family": "Loranthus",
     "style": "normal",
     "weight": 400,
-    "src": "/fonts/Loranthus-Regular.ttf"
+    "src": "./fonts/Loranthus-Regular.ttf"
   },
   {
     "category": "hand",
     "family": "Loranthus",
     "style": "normal",
     "weight": 700,
-    "src": "/fonts/Loranthus-Bold.ttf"
+    "src": "./fonts/Loranthus-Bold.ttf"
   },
   {
     "category": "hand",
     "family": "Loranthus",
     "style": "italic",
     "weight": 400,
-    "src": "/fonts/Loranthus-Italic.ttf"
+    "src": "./fonts/Loranthus-Italic.ttf"
   },
   {
     "category": "hand",
     "family": "Loranthus",
     "style": "italic",
     "weight": 700,
-    "src": "/fonts/Loranthus-BoldItalic.ttf"
+    "src": "./fonts/Loranthus-BoldItalic.ttf"
   }
 ]

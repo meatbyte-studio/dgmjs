@@ -100,6 +100,7 @@ export class Collab {
       signaling: this.signalingUrls,
       password: this.signalingPassword,
     });
+    console.log(this.signalingUrls, this.signalingPassword);
 
     this.docSyncPlugin.start(this.yDoc);
     this.userPresencePlugin.start(this.yProvider.awareness, userIdentity);
